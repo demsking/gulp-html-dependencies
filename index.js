@@ -31,7 +31,9 @@ module.exports = (options) => {
         dest = path.join(dest, options.prefix);
         
         file.contents = new Buffer(file.contents.toString().replace(REGEX, (match, attr, quote, url, pathname, engine, filename) => {
-            const dest_file = path.join(dest, options.flat ? path.basename(filename) : filename);
+            const f = options.flat ? path.basename(filename) : filename;
+            const dest_file = path.join(dest, f);
+            const url_file = path.join(options.prefix, f);
             
             try {
                 mkdirp.sync(path.dirname(dest_file));
@@ -41,7 +43,7 @@ module.exports = (options) => {
                 return done(new gutil.PluginError(PLUGIN_NAME, err));
             }
             
-            return attr + '=' + quote + path.join(options.prefix, filename) + quote;
+            return attr + '=' + quote + url_file + quote;
         }));
         
         done(null, file);

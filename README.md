@@ -1,5 +1,5 @@
 # gulp-html-dependencies
-Parse your HTML file and copy bower/npm files to your destination directory
+Parse your HTML file and copy bower/npm dependencies to your destination directory
 
 ## Install
 

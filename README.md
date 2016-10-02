@@ -1,6 +1,10 @@
 # gulp-html-dependencies
 Parse your HTML file and copy bower/npm files to your destination directory
 
+## Install
+
+`npm install --save-dev gulp-html-dependencies`
+
 ## Usage
 The project structure:
 ```

@@ -29,7 +29,7 @@ describe(info.name, () => {
         next();
     });
     
-    it('should find and copy npm and bower dependencies using user options', (next) => {
+    it('should find and copy npm and bower dependencies using user options {dest}', (next) => {
         var stream = plugin({
             dest: '/tmp/dist',
         });
@@ -38,7 +38,7 @@ describe(info.name, () => {
         next();
     });
     
-    it('should failed', (next) => {
+    it('should find and copy npm and bower dependencies using user options {dest,prefix}', (next) => {
         var stream = plugin({
             dest: '/tmp/dist',
             prefix: '/vendor',
@@ -46,5 +46,29 @@ describe(info.name, () => {
         
         stream.write(fakeFile);
         next();
+    });
+    
+    it('should find and copy npm and bower dependencies using user options {dest,prefix,flat}', (next) => {
+        var stream = plugin({
+            dest: '/tmp/dist',
+            prefix: '/vendor-flat',
+            flat: true,
+        });
+        
+        stream.write(fakeFile);
+        next();
+    });
+    
+    it('should failed', (next) => {
+        var stream = plugin({
+            dest: '/root/dist',
+            prefix: '/vendor',
+        });
+        
+        try {
+            stream.write(fakeFile);
+        } catch(e) {
+            next();
+        }
     });
 });

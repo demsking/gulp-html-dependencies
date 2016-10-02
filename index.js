@@ -31,7 +31,7 @@ module.exports = (options) => {
         dest = path.join(dest, options.prefix);
         
         file.contents = new Buffer(file.contents.toString().replace(REGEX, (match, attr, quote, url, pathname, engine, filename) => {
-            const dest_file = path.join(dest, filename);
+            const dest_file = path.join(dest, options.flat ? path.basename(filename) : filename);
             
             try {
                 mkdirp.sync(path.dirname(dest_file));

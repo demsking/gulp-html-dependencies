@@ -72,8 +72,8 @@ gulp.task('dependencies-jade', function() {
     return gulp.src('src/products.pug')
         .pipe(pug())
         .pipe(dependencies({
-            dest: path_dest,    // The basedir of your application. default: path.dirname(file.path)
-            prefix: '/vendor',  // The URL prefix. Default "/"
+            dest: path_dest, 
+            prefix: '/vendor',
         }))
         .pipe(gulp.dest(path_dest));
 });
@@ -124,10 +124,66 @@ project/
     </head>
     <body>
         <h1>Page title</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempus enim leo, ac lacinia purus accumsan sit amet. In ultrices sagittis nulla, ut dapibus.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         
         <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/vendor/jquery/dist/jquery.min.js"></script>
+        <script src="/vendor/angular/angular.min.js"></script>
+        <script src="plugins.js"></script>
+    </body>
+</html>
+
+```
+
+## Use the flat option
+
+
+```js
+gulp.task('dependencies', function() {
+    return gulp.src('src/**/*.pug')
+        .pipe(pug())
+        .pipe(dependencies({
+            dest: 'dist',
+            prefix: '/vendor',
+            flat: true
+        }))
+        .pipe(gulp.dest('dist'));
+});
+
+
+```
+
+After the build, get:
+
+```
+project/
+├── ...
+├── dist
+│   ├── ..
+│   └── vendor
+│       ├── angular.min.js
+│       ├── bootstrap.min.css
+│       ├── bootstrap.min.js
+│       ├── bootstrap-theme.min.css
+│       └── jquery.min.js
+├── ...
+```
+
+```html
+<!doctype html>
+<html>
+    <head>
+        <title>Test file</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/vendor/bootstrap.min.css">
+        <link rel="stylesheet" href="/vendor/bootstrap-theme.min.css">
+    </head>
+    <body>
+        <h1>Page title</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        
+        <script src="/vendor/bootstrap.min.js"></script>
+        <script src="/vendor/jquery.min.js"></script>
         <script src="/vendor/angular/angular.min.js"></script>
         <script src="plugins.js"></script>
     </body>

@@ -1,6 +1,8 @@
 # gulp-html-dependencies
 Parse your HTML file and copy bower/npm dependencies to your destination directory
 
+[![Build Status](https://travis-ci.org/demsking/gulp-html-dependencies.svg?branch=master)](https://travis-ci.org/demsking/gulp-html-dependencies)
+
 ## Install
 
 `npm install --save-dev gulp-html-dependencies`

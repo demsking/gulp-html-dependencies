@@ -1,12 +1,10 @@
 language: node_js
-
 node_js:
-  - "4"
-  
+- '4'
 script:
-  - npm install
-  - npm test
-  - echo "Deploying!"
-  
-after_success:
-  - npm publish
+- npm install
+- npm test
+deploy:
+  provider: npm
+  api_key:
+    secure: tZb3yPV6FHj9DKW5xxc8X3Qg9Kpne4BIhpOK5NfdAUDYi1FVANpvU4ulF35bRbDUvCKF1mttkVzxqXjE9JkNxlVrFOTIiSzXrI5P20KCBtmaPp9/aP8dNuEeVQKC1Lpr3XoqXHThsxCU1xpJimRqUruTe6YTqcAuBkVWT/5RR4eiXcpFNlo5Csvag4HEaFVSDdQgCGvItrbigA7/ToAQXAY76RmHoSP3xyilb15NHe5Um28ZqEuUhL9t32raRRmPMq3B0EOuKOjBQxTz/k3l0WjrXH5axcafw9aNHF+IwNv/rEkIpeRxMxWIr3cK5qi0ly3QAwpRA0Wkez87B7VPFLsFbTeKTkVJgFLcnb9XBspfy5WvQ4NImKgxWL3OiqEJZAG0a/sSdGzhyWEVmG8F5RHGHOpp44ANQ1dYdXQlxXCR80XIXcWWGZoHXnSceo4WMW1nbE40t3oE/ZCMdmgCcj8jq7iWlvSwhKRpt+fuD8kRmO6TtMac4tAfsY6AGrky1qJ83QI7VdiFCd5NyP5hPZEL5H+Uu/89TtHeEl/61LXPZBuxCaNFVutkquRA4FOlISxEi9Ue3eKwSg5kNXT6NBlJFa3rueTOz1x159y8BGqXZ71IQ50GMN+l3hiMUv0QoWaMn86+5bIjJyBdxSylHNbC9iXxk7Py4JK8czppWVU=

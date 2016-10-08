@@ -26,6 +26,12 @@ module.exports = (options) => {
     
     options.prefix = options.prefix || '/';
     
+    if (options.prefix.length > 1) {
+        if (options.prefix[options.prefix.length - 1] != '/') {
+            options.prefix += '/';
+        }
+    }
+    
     return es.map((file, done) => {
         let dest = options.dest || path.dirname(file.path);
         

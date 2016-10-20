@@ -23,7 +23,6 @@ const REGEX = /(href|src)=("|')(.*((bower_components|node_modules)\/([a-z0-9\.+@
 
 module.exports = (options) => {
     options = options || {};
-    
     options.prefix = options.prefix || '/';
     
     if (options.prefix.length > 1) {

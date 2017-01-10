@@ -19,12 +19,14 @@ var es = require('event-stream')
   , url = require('url');
 
 const PLUGIN_NAME = 'gulp-html-dependencies';
-const REGEX = /(href|src)=("|')(.*((bower_components|node_modules)\/([a-z0-9\.+@~$!;:\/\\{}()\[\]|=&*£%§-]+\.[\w\d]+)))("|')/gi;
+const REGEX = /("|')([\.\/\\]*((bower_components|node_modules)\/([a-z0-9\.+@~$!;:\/\\{}()\[\]|=&*£%§_-]+(\.[a-z0-9]+)?)))['"]/gi;
 
 module.exports = (options) => {
     options = options || {};
     
-    options.prefix = options.prefix || '/';
+    if (typeof options.prefix == 'undefined') {
+        options.prefix = '';
+    }
     
     if (options.prefix.length > 1) {
         if (options.prefix[options.prefix.length - 1] != '/') {
@@ -37,9 +39,16 @@ module.exports = (options) => {
         
         dest = path.join(dest, options.prefix);
         
-        file.contents = new Buffer(file.contents.toString().replace(REGEX, (match, attr, quote, uri, pathname, engine, filename) => {
-            const f = options.flat ? path.basename(filename) : filename;
-            const dest_file = path.join(dest, f);
+        file.contents = new Buffer(file.contents.toString().replace(REGEX, (matches, quote, uri, pathname, engine, filename) => {
+            const ext = path.extname(filename);
+            
+            if (!ext) {
+                uri += '.js';
+            }
+            
+            const f = options.flat && ext ? path.basename(filename) : filename;
+            const dest_file_prefix = ext ? dest : path.join(dest, engine);
+            const dest_file = path.join(dest_file_prefix, f + (!ext ? '.js' : ''));
             const url_file = url.resolve(options.prefix, f);
             
             try {
@@ -50,7 +59,7 @@ module.exports = (options) => {
                 return done(new gutil.PluginError(PLUGIN_NAME, err));
             }
             
-            return attr + '=' + quote + url_file + quote;
+            return quote + url_file + quote;
         }));
         
         done(null, file);

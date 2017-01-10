@@ -51,7 +51,7 @@ describe(info.name, () => {
     it('should find and copy npm and bower dependencies using user options {dest,prefix,flat}', (next) => {
         var stream = plugin({
             dest: '/tmp/dist',
-            prefix: '/vendor-flat',
+            prefix: '/vendor-flat/',
             flat: true,
         });
         
